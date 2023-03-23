@@ -74,7 +74,7 @@ if  inputFile:
             gpkg_file = st.file_uploader("upload file",type=['gpkg'])
             # i used subprocess to make ogr command as it was disabled to convert to gdb using built in function
             if gpkg_file:
-                subprocess.call(['ogr2ogr', '-f', 'OpenFileGDB', 'geodatabase.gdb', 'file.gpkg'])
+                subprocess.call(['ogr2ogr', '-f', 'FileGDB', 'geodatabase.gdb', 'file.gpkg'])
                 gdb_path = 'geodatabase.gdb'
                 zip_gdb_path = 'geodatabase'
                 zip_path = shutil.make_archive(zip_gdb_path,"zip",gdb_path)

@@ -1,3 +1,4 @@
+affine
 altair
 anyio
 argon2-cffi
@@ -40,6 +41,7 @@ geojson
 geopandas
 gitdb
 GitPython
+here-map-widget-for-jupyter
 idna
 importlib-metadata
 ipyevents
@@ -110,6 +112,7 @@ pytz
 pytz-deprecation-shim
 PyYAML
 pyzmq
+rasterio
 requests
 rfc3339-validator
 rfc3986-validator
@@ -121,9 +124,11 @@ shapely
 six
 smmap
 sniffio
+snuggs
 soupsieve
 stack-data
 streamlit
+streamlit-folium
 terminado
 tinycss2
 toml

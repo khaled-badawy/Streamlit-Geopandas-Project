@@ -130,7 +130,7 @@ stack-data
 streamlit
 pandas
 numpy
-subprocess
+gdal
 streamlit-folium
 terminado
 tinycss2

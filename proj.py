@@ -75,7 +75,7 @@ if  inputFile:
             # i used subprocess to make ogr command as it was disabled to convert to gdb using built in function
             if gpkg_file:
                 st.write("HIIIII")
-                subprocess.call(['ogr2ogr', '-f', 'FileGDB', 'geodatabase.gdb', f'{gpkg_file}'])
+                subprocess.run(['ogr2ogr', '-f', 'FileGDB', 'geodatabase.gdb', f'{gpkg_file}'],shell=True)
                 gdb_path = 'geodatabase.gdb'
                 zip_gdb_path = 'geodatabase'
                 zip_path = shutil.make_archive(zip_gdb_path,"zip",gdb_path)

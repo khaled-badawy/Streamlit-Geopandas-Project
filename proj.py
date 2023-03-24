@@ -32,7 +32,7 @@ if  inputFile:
         # dropdown list to choose the intended conversion
         option = st.selectbox(
             'Choose format you want to transform your uploaded file into ',
-            ('GeoPackage', 'Shape file', 'Geo-database'))
+            ('GeoPackage', 'Shape file'))
         
         st.write('You selected:', option)
 
@@ -64,27 +64,31 @@ if  inputFile:
                     file_name = 'file.gpkg',
                     data = file
                 )
-        else :
-            if os.path.exists('geodatabase.gdb'):
-                shutil.rmtree('geodatabase.gdb')
-            # here i converted to GPKG because it wasn't available to convert to gdb directly
-            geopackage_file = gfile.to_file("./file.gpkg" , driver = 'GPKG')
-            # i used subprocess to make ogr command as it was disabled to convert to gdb using built in function
-            st.write("Hint : there's a file called 'file.gpkg' that has been created in your directory please upload it to convert to geodatabase")
-            gpkg_file = st.file_uploader("upload file",type=['gpkg'])
-            # i used subprocess to make ogr command as it was disabled to convert to gdb using built in function
-            if gpkg_file:
-                st.write("HIIIII")
-                subprocess.run(['ogr2ogr', '-f', 'FileGDB', 'geodatabase.gdb', f'{gpkg_file}'],shell=True)
-                gdb_path = 'geodatabase.gdb'
-                zip_gdb_path = 'geodatabase'
-                zip_path = shutil.make_archive(zip_gdb_path,"zip",gdb_path)
-                with open(zip_path, "rb") as file:
-                    st.download_button(
-                        label = 'Download file as Geo-database file ',
-                        file_name = 'geodatabase.zip',
-                        data = file,
-                    )
+
+        ##### in the next section it works to convert file into Geodatabase without deploying the app , it crashed in deployement
+        ##### i don't know why yet but it seems that subprocess library cant by recognised to run ogr2ogr command because of
+        ##### dependencies and Configuration
+        # else :
+        #     if os.path.exists('geodatabase.gdb'):
+        #         shutil.rmtree('geodatabase.gdb')
+        #     # here i converted to GPKG because it wasn't available to convert to gdb directly
+        #     geopackage_file = gfile.to_file("./file.gpkg" , driver = 'GPKG')
+        #     # i used subprocess to make ogr command as it was disabled to convert to gdb using built in function
+        #     st.write("Hint : there's a file called 'file.gpkg' that has been created in your directory please upload it to convert to geodatabase")
+        #     gpkg_file = st.file_uploader("upload file",type=['gpkg'])
+        #     # i used subprocess to make ogr command as it was disabled to convert to gdb using built in function
+        #     if gpkg_file:
+        #         st.write("HIIIII")
+        #         subprocess.run(['ogr2ogr', '-f', 'FileGDB', 'geodatabase.gdb', f'{gpkg_file}'],shell=True)
+        #         gdb_path = 'geodatabase.gdb'
+        #         zip_gdb_path = 'geodatabase'
+        #         zip_path = shutil.make_archive(zip_gdb_path,"zip",gdb_path)
+        #         with open(zip_path, "rb") as file:
+        #             st.download_button(
+        #                 label = 'Download file as Geo-database file ',
+        #                 file_name = 'geodatabase.zip',
+        #                 data = file,
+        #             )
     if show_map:
         m = leafmap.Map(
             draw_control=False,
